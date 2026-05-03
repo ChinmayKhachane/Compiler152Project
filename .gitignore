@@ -1,0 +1,42 @@
+# C/C++ compilation intermediates
+*.o
+*.obj
+*.lo
+*.slo
+*.d
+*.gcno
+*.gcda
+*.gcov
+
+# Static/shared libs
+*.a
+*.la
+*.so
+*.so.*
+*.dylib
+*.dll
+*.lib
+
+# Executables / binaries
+*.out
+*.app
+*.exe
+*.elf
+compiler_project
+compiler_project.*
+
+# Common build directories / generators
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+compile_commands.json
+Makefile
+makedep*
+libtool
+aclocal.m4
+m4/
+autom4te.cache/
+
+# Local tooling noise
+.DS_Store
