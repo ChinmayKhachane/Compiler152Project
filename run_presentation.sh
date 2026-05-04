@@ -25,6 +25,7 @@ TEST_FILES=(
   "test/case1.py"
   "test/case2.py"
   "test/test_irgen.py"
+  "test/case_syntax_error.py"
 )
 
 for test_file in "${TEST_FILES[@]}"; do
