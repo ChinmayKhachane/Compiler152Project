@@ -71,23 +71,28 @@ int main(int argc, char **argv) {
     errors.display(sourceLines);
     return 1;
   }
-  std::cout << "No lexical/syntax errors detected. Executing program...\n";
   if (!ast) {
     std::cerr << "Parser failed to build AST.\n";
     return 1;
   }
 
-  // Generate and display intermediate representation
   IRGenerator irGen;
   auto irLines = irGen.generate(*ast);
-  std::cout << "\n--- Intermediate Representation ---\n";
-  for (const auto &line : irLines) {
-    std::cout << line << "\n";
+  std::cout << "\n====================================================\n";
+  std::cout << "SOURCE: " << inputPath << "\n";
+  std::cout << "STATUS: OK\n";
+  std::cout << "====================================================\n\n";
+
+  std::cout << "Intermediate Code\n";
+  std::cout << "-----------------\n";
+  for (size_t i = 0; i < irLines.size(); ++i) {
+    std::cout << (i + 1) << ". " << irLines[i] << "\n";
   }
-  std::cout << "--- End IR ---\n\n";
+  std::cout << "-----------------\n\n";
 
   MemoryManager memory;
-  Interpreter interpreter(errors, memory, std::cout);
+  std::ostringstream programOutput;
+  Interpreter interpreter(errors, memory, programOutput);
   interpreter.execute(*ast);
 
   if (errors.hasErrors()) {
@@ -95,10 +100,18 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  std::cout << "Execution completed with no runtime errors.\n";
-  std::cout << "\n[Memory] total allocations: " << memory.totalHeapAllocations()
-            << ", live objects: " << memory.liveHeapObjects()
-            << ", est bytes: " << memory.estimatedBytesAllocated() << "\n";
+  std::cout << "Program Output\n";
+  std::cout << "--------------\n";
+  std::cout << programOutput.str();
+  if (programOutput.str().empty())
+    std::cout << "(no output)\n";
+  std::cout << "--------------\n\n";
+
+  std::cout << "Memory Summary\n";
+  std::cout << "--------------\n";
+  std::cout << "Total allocations : " << memory.totalHeapAllocations() << "\n";
+  std::cout << "Live heap objects : " << memory.liveHeapObjects() << "\n";
+  std::cout << "--------------\n";
 
   return 0;
 }

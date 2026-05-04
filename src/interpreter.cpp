@@ -20,7 +20,6 @@ Value::ListPtr MemoryManager::makeList(Value::List elements) {
   auto list = std::make_shared<Value::List>(std::move(elements));
   heapLists_.push_back(list);
   totalAllocations_++;
-  estimatedBytesAllocated_ += sizeof(Value::List) + list->size() * sizeof(Value);
   return list;
 }
 
