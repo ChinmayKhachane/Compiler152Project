@@ -5,7 +5,7 @@ PROJECT_ROOT="$(cd "$(dirname "$0")" && pwd)"
 BUILD_DIR="$PROJECT_ROOT/build"
 EXECUTABLE="$BUILD_DIR/compiler"
 
-echo "=== Compiler152Project Presentation Script ==="
+echo "=== Compiler 152 Project Presentation Script ==="
 
 # Build using CMake if needed
 if [ ! -x "$EXECUTABLE" ]; then
