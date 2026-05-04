@@ -44,12 +44,10 @@ public:
 
   size_t liveHeapObjects() const;
   size_t totalHeapAllocations() const { return totalAllocations_; }
-  size_t estimatedBytesAllocated() const { return estimatedBytesAllocated_; }
 
 private:
   std::vector<std::weak_ptr<Value::List>> heapLists_;
   size_t totalAllocations_ = 0;
-  size_t estimatedBytesAllocated_ = 0;
 };
 
 class Interpreter {

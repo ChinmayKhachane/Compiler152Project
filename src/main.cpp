@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
   auto irLines = irGen.generate(*ast);
   std::cout << "\n====================================================\n";
   std::cout << "SOURCE: " << inputPath << "\n";
-  std::cout << "STATUS: lexical/syntax analysis passed\n";
+  std::cout << "STATUS: OK\n";
   std::cout << "====================================================\n\n";
 
   std::cout << "Intermediate Code\n";
@@ -111,7 +111,6 @@ int main(int argc, char **argv) {
   std::cout << "--------------\n";
   std::cout << "Total allocations : " << memory.totalHeapAllocations() << "\n";
   std::cout << "Live heap objects : " << memory.liveHeapObjects() << "\n";
-  std::cout << "Estimated bytes   : " << memory.estimatedBytesAllocated() << "\n";
   std::cout << "--------------\n";
 
   return 0;
