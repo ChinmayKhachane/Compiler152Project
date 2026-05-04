@@ -121,12 +121,24 @@ CFGExpressionValidator::tokenize(const std::string &expr,
     }
 
     switch (c) {
-    case '+': tokens.push_back({TokKind::PLUS, "+"}); break;
-    case '-': tokens.push_back({TokKind::MINUS, "-"}); break;
-    case '*': tokens.push_back({TokKind::STAR, "*"}); break;
-    case '/': tokens.push_back({TokKind::SLASH, "/"}); break;
-    case '(': tokens.push_back({TokKind::LPAREN, "("}); break;
-    case ')': tokens.push_back({TokKind::RPAREN, ")"}); break;
+    case '+':
+      tokens.push_back({TokKind::PLUS, "+"});
+      break;
+    case '-':
+      tokens.push_back({TokKind::MINUS, "-"});
+      break;
+    case '*':
+      tokens.push_back({TokKind::STAR, "*"});
+      break;
+    case '/':
+      tokens.push_back({TokKind::SLASH, "/"});
+      break;
+    case '(':
+      tokens.push_back({TokKind::LPAREN, "("});
+      break;
+    case ')':
+      tokens.push_back({TokKind::RPAREN, ")"});
+      break;
     default:
       error = "CFG tokenizer rejected character '" + std::string(1, c) + "'";
       return {};
@@ -143,7 +155,8 @@ bool CFGExpressionValidator::parseExpr(const std::vector<Tok> &tokens,
   if (!parseTerm(tokens, pos))
     return false;
 
-  while (tokens[pos].kind == TokKind::PLUS || tokens[pos].kind == TokKind::MINUS) {
+  while (tokens[pos].kind == TokKind::PLUS ||
+         tokens[pos].kind == TokKind::MINUS) {
     pos++;
     if (!parseTerm(tokens, pos))
       return false;
@@ -156,7 +169,8 @@ bool CFGExpressionValidator::parseTerm(const std::vector<Tok> &tokens,
   if (!parseFactor(tokens, pos))
     return false;
 
-  while (tokens[pos].kind == TokKind::STAR || tokens[pos].kind == TokKind::SLASH) {
+  while (tokens[pos].kind == TokKind::STAR ||
+         tokens[pos].kind == TokKind::SLASH) {
     pos++;
     if (!parseFactor(tokens, pos))
       return false;

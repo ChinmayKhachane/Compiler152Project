@@ -1,6 +1,7 @@
 #include "automata.hpp"
 #include "errorreport.hpp"
 #include "interpreter.hpp"
+#include "irgen.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
 #include "token.hpp"
@@ -75,6 +76,15 @@ int main(int argc, char **argv) {
     std::cerr << "Parser failed to build AST.\n";
     return 1;
   }
+
+  // Generate and display intermediate representation
+  IRGenerator irGen;
+  auto irLines = irGen.generate(*ast);
+  std::cout << "\n--- Intermediate Representation ---\n";
+  for (const auto &line : irLines) {
+    std::cout << line << "\n";
+  }
+  std::cout << "--- End IR ---\n\n";
 
   MemoryManager memory;
   Interpreter interpreter(errors, memory, std::cout);
